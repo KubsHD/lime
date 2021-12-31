@@ -62,8 +62,8 @@ class VitaPlatform extends PlatformTarget
 
 		//System.copyFile(targetDirectory + "/obj/Main" + (project.debug ? "-debug" : ""), executablePath);
 
-		System.runCommand("", "/usr/local/vitasdk/bin/vita-elf-create", [executablePath + "/obj/Main" + (project.debug ? "-debug" : "") + ".elf", executablePath + "Main.velf"]);
-		System.runCommand("", "/usr/local/vitasdk/bin/vita-make-fself", ["-n -c", executablePath + "Main.velf", applicationDirectory + "eboot.bin"]);
+		System.runCommand("", "/usr/local/vitasdk/bin/vita-elf-create", [targetDirectory + "/obj/Main" + (project.debug ? "-debug" : "") + ".elf", targetDirectory + "/obj/Main.velf"]);
+		System.runCommand("", "/usr/local/vitasdk/bin/vita-make-fself", ["-n -c", targetDirectory + "/obj/Main.velf", executablePath + "eboot.bin"]);
 
 
 	}
