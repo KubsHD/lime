@@ -613,6 +613,9 @@ class CommandLineTools
 				case LINUX:
 					platform = new LinuxPlatform(command, project, targetFlags);
 
+				case VITA:
+					platform = new VitaPlatform(command, project, targetFlags);
+
 				case FLASH:
 					platform = new FlashPlatform(command, project, targetFlags);
 

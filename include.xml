@@ -42,9 +42,6 @@
 	<target name="ps4" handler="lime-ps4" />
 	<haxelib name="lime-ps4" if="ps4" />
 
-	<target name="vita" handler="lime-vita" />
-	<haxelib name="lime-vita" if="vita" />
-
 	<target name="switch" handler="lime-switch" />
 	<haxelib name="lime-switch" if="switch" />
 
@@ -58,7 +55,6 @@
 	<haxelib name="lime-console-pc" if="console-pc" />
 
 	<section if="hxp" unless="lime-tools">
-
 		<target name="air" path="tools/platforms/AIRPlatform.hx" />
 		<target name="android" path="tools/platforms/AndroidPlatform.hx" />
 		<target name="emscripten" path="tools/platforms/EmscriptenPlatform.hx" />
@@ -69,7 +65,7 @@
 		<target name="mac" path="tools/platforms/MacPlatform.hx" />
 		<target name="tvos" path="tools/platforms/TVOSPlatform.hx" />
 		<target name="windows" path="tools/platforms/WindowsPlatform.hx" />
-
+		<target name="vita" path="tools/platforms/VitaPlatform.hx" />
 	</section>
 
 	<section unless="display">

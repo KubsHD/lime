@@ -208,7 +208,7 @@ class LinuxPlatform extends PlatformTarget
 
 				if (noOutput) return;
 
-				CPPHelper.compile(project, targetDirectory + "/obj", flags.concat(["-Dstatic_link"]));
+				CPPHelper.compile(project, targetDirectory + "/obj", flags);
 				CPPHelper.compile(project, targetDirectory + "/obj", flags, "BuildMain.xml");
 
 				System.copyFile(targetDirectory + "/obj/Main" + (project.debug ? "-debug" : ""), executablePath);

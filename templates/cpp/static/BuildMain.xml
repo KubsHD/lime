@@ -83,6 +83,18 @@
 
 		</section>
 
+		<section if="vita">
+
+				<lib name="-lc" />
+				<lib name="-lpthread" />
+				<lib name="-ldl" />
+				<lib name="-lm" />
+				<lib name="-llibIMGEGL_stub" />
+				<lib name="-llibGLESv2_stub" />
+				<lib name="-llibGLESv1_CM_stub" />
+
+			</section>
+
 		<lib name="libApplicationMain${DBG}${LIBEXT}" />
 
 	</target>
