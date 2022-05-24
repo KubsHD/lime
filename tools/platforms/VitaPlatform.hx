@@ -44,6 +44,8 @@ class VitaPlatform extends PlatformTarget
 
 	public override function build():Void
 	{
+		update();
+
 		var hxml = targetDirectory + "/haxe/" + buildType + ".hxml";
 
 		System.mkdir(targetDirectory);
@@ -63,8 +65,12 @@ class VitaPlatform extends PlatformTarget
 		//System.copyFile(targetDirectory + "/obj/Main" + (project.debug ? "-debug" : ""), executablePath);
 
 		System.runCommand("", "/usr/local/vitasdk/bin/vita-elf-create", [targetDirectory + "/obj/Main" + (project.debug ? "-debug" : "") + ".elf", targetDirectory + "/obj/Main.velf"]);
-		System.runCommand("", "/usr/local/vitasdk/bin/vita-make-fself", ["-n -c", targetDirectory + "/obj/Main.velf", executablePath + "eboot.bin"]);
+		System.runCommand("", "/usr/local/vitasdk/bin/vita-make-fself", ["-n -c", targetDirectory + "/obj/Main.velf", targetDirectory + "/bin/eboot.bin"]);
 
+		System.runCommand("", "/usr/local/vitasdk/bin/vita-make-fself",
+		 ["-b Export/vita/bin/eboot.bin", "-a Export/vita/bin/assets=assets",
+			"-s Export/vita/bin/sce_sys/param.sfo", "-a Export/vita/bin/sce_module=sce_module",
+			executablePath + ".vpk"]);
 
 	}
 
@@ -141,24 +147,7 @@ class VitaPlatform extends PlatformTarget
 	{
 		var arguments = additionalArguments.copy();
 
-		if (Log.verbose)
-		{
-			arguments.push("-verbose");
-		}
-
-		if (targetType == "nodejs")
-		{
-			NodeJSHelper.run(project, targetDirectory + "/bin/ApplicationMain.js", arguments);
-		}
-		else if (targetType == "java")
-		{
-			System.runCommand(applicationDirectory, "java", ["-jar", project.app.file + ".jar"].concat(arguments));
-		}
-		else if (project.target == cast System.hostPlatform)
-		{
-			arguments = arguments.concat(["-livereload"]);
-			System.runCommand(applicationDirectory, "./" + Path.withoutDirectory(executablePath), arguments);
-		}
+		// todo: add launch on hardware using vitacompanion
 	}
 
 	public override function update():Void
@@ -208,6 +197,9 @@ class VitaPlatform extends PlatformTarget
 
 		ProjectHelper.recursiveSmartCopyTemplate(project, "haxe", targetDirectory + "/haxe", context);
 		ProjectHelper.recursiveSmartCopyTemplate(project, targetType + "/hxml", targetDirectory + "/haxe", context);
+
+		ProjectHelper.recursiveSmartCopyTemplate(project, "vita" + "/sce_sys", targetDirectory + "/bin/sce_sys", context);
+		ProjectHelper.recursiveSmartCopyTemplate(project, "vita" + "/sce_module", targetDirectory + "/bin/sce_module", context);
 
 
 		ProjectHelper.recursiveSmartCopyTemplate(project, "cpp/static", targetDirectory + "/obj", context);
