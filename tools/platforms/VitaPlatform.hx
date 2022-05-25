@@ -202,7 +202,7 @@ class VitaPlatform extends PlatformTarget
 		ProjectHelper.recursiveSmartCopyTemplate(project, "vita" + "/sce_module", targetDirectory + "/bin/sce_module", context);
 
 
-		ProjectHelper.recursiveSmartCopyTemplate(project, "cpp/static", targetDirectory + "/obj", context);
+		ProjectHelper.recursiveSmartCopyTemplate(project, "vita/static", targetDirectory + "/obj", context);
 
 
 		// context.HAS_ICON = IconHelper.createIcon (project.icons, 256, 256, Path.combine (applicationDirectory, "icon.png"));
